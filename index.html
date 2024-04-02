@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Montserrat:wght@400;500;600;700&family=Pixelify+Sans:wght@400..700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="./style.css">
+
+  <title>Weather || Project</title>
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition: all 0.3s ease-in-out;
+    }
+
+    body{
+      opacity: 0;
+    }
+
+    .main-container{
+      height: 100dvh;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-position: center;
+      position: relative;
+    }
+
+    .container{
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-container{
+      margin-bottom: 20px;
+    }
+
+    .current-location-btn{
+      background: transparent;
+      backdrop-filter: blur(50px);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 35px;
+      box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .current-location-btn:hover{
+      background-color: rgb(222, 104, 19);
+      box-shadow: 0 5px 10px rgba(255,255,255,0.5 );
+    }
+
+    .current-location-btn:active{
+      box-shadow: none;
+      transform: translateY(3px);
+    }
+
+    .location-icon{
+      margin-left: 8px;
+    }
+
+
+
+    .main-weather-information{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+
+  
+
+
+    /* search container */
+
+
+    
+    .input-container{
+      width: 100%;
+      margin-bottom: 100px;
+      position: relative;
+    }
+
+    .input{
+      width: 100%;
+      padding: 17px 19px 17px 50px;
+      border-radius: 100px;
+      font-size: 17px;
+      border: none;
+      background: transparent;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+      color: white;
+    }
+
+    .input::placeholder{
+      color: white;
+    }
+
+    .input:focus{
+      outline: none;
+    }
+
+    .error-message{
+      position: absolute;
+      bottom: -30px;
+      left: 45px;
+      background-color: rgba(255, 255, 255, 0.436);
+      color: black;
+      border-radius: 36px;
+      padding: 2px 7px;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0;
+    }
+
+    .search-btn{
+      position: absolute;
+      right: 30px;
+      top: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      padding: 0 0 0 15px; 
+    }
+
+    .mag{
+      color: white;
+    }
+
+    .mag:hover{
+      color: rgb(220, 220, 220);
+    }
+
+    .map-symbol{
+      position: absolute;
+      left: 25px;
+      top: 20px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      z-index: 2;
+    }
+
+    
+
+    /* left-side */
+
+    .left-side{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    align-self: end;
+  }
+
+  .temperature-container{
+    display: flex;
+    justify-content: start;
+  }
+
+  .temp{
+    font-size: 90px;
+    color: white;
+    line-height: 70px;
+    font-weight: 500;
+  }
+
+  .degree-symbol{
+    font-size: 20px;
+    line-height: 10px;
+    color: white;
+    margin-right: 3px;
+    font-weight: 500;
+  }
+
+  .celsius-symbol{
+    font-size: 20px;
+    line-height: 15px;
+    color: white;
+    font-weight: 600;
+  }
+
+  .temp-symbol{
+    align-self: center;
+    width: 70px;
+  }
+  .icons{
+    width: 100%;
+    /* filter: grayscale(70%); */
+    filter: drop-shadow(0px 5px 15px white);
+    animation: Shake 0.6s linear infinite; 
+  }
+  
+  /* animation */
+
+  /*Using keyframes for shaking an image*/
+@keyframes Shake { 
+    0%,20%,40%{ 
+        transform: rotate(8deg); 
+    } 
+
+    50%,60%,70%,80%,90%,100%{
+      transform: rotate(0deg);
+    }
+  
+    10%,30% { 
+        transform: rotate(-8deg); 
+    } 
+  
+}
+
+  .temperature-details{
+    margin-bottom: 10px;
+    color: white;
+  }
+
+
+  .temperature-title{
+    font-size: 35px;
+    
+    font-weight: 500;
+    line-height: 34px;
+    
+  }
+
+  .weather-desc{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 22px;
+    color: white;
+    font-weight: 500;
+    line-height: 34px;
+    
+  }
+
+  .temperature-info{
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .time{
+    padding: 0 10px 0 0;
+    border-right: solid 1px white;
+    line-height: 15px;
+  }
+
+  .humidity-section{
+    padding: 0 10px;
+    border-right: solid 1px white;
+    line-height: 15px;
+  }
+
+  .feels-like-section{
+    padding: 0 10px;
+  }
+
+
+
+    /* right side */
+
+    .right-side{
+    /* border: solid 0.8px white; */
+    border-radius: 25px;
+    overflow: hidden;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 5px 8px rgba(0,0,0,0.3);
+    background: inherit; 
+    backdrop-filter: blur(15px); 
+  }
+
+
+  .weather-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+  }
+
+  .weather-title{
+    font-size: 17px;
+    margin-bottom: 20px;
+    border-bottom: #ffffff solid 0.8px;
+    padding-bottom: 10px;
+    width: 100%;
+  }
+
+  .property-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .property-title{
+    width: 110px;
+  }
+
+
+  /* media query */
+
+  @media only screen and (max-width:690px){
+    .main-weather-information{
+      grid-template-columns: 1fr;
+      row-gap: 5px;
+    }
+    .error-message{
+      font-size: 12px;
+      bottom: -45px;
+      left: 0px;
+      padding-left: 10px;
+    }
+    .temperature-info{
+      background-color: transparent;
+    backdrop-filter: blur(50px);
+    padding: 5px 10px;
+    border-radius: 25px;
+    margin-top: 10px;
+    }
+  }
+   
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="container">
+      <div class="input-container">
+        <div class="error-message">location not found ! please enter a different location</div>
+        <i class="fa-solid fa-location-dot map-symbol" style="color: #ffffff;"></i>
+        <input class="input" type="text" name="" id="inp" placeholder="Enter location" onkeydown="  
+        if(event.key === 'Enter'){
+          getWeatherFromLocality(`${inp.value.toLowerCase()}`);
+        }  
+        ">
+        <button onclick="getWeatherFromLocality(`${inp.value.toLowerCase()}`)" class="search-btn"><i class="mag fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="main-weather-information">
+        <div class="left-side">
+          <div class="btn-container"><button class="current-location-btn" onclick="displayCurrentLocation()">current location
+            <i class="fa-solid fa-location-crosshairs location-icon" style="color: #ffffff;"></i>
+          </button></div>
+          <div class="temperature-container">
+            <div class="temp"></div>
+            <div class="degree-symbol">o</div>
+            <div class="celsius-symbol">C</div>
+            <div class="temp-symbol"><img class="icons" src="" alt=""></div>
+          </div>
+
+          <div class="weather-desc">
+    
+          </div>
+
+          <div class="temperature-details">
+            <span class="temperature-title"></span>
+            <span class="yourLocation" style="font-size: 15px;"></span>
+          </div>
+
+          <div class="temperature-info">
+            <div class="time"></div>
+            <div class="humidity-section">H: <span class="humidity"></span></div>
+            <div class="feels-like-section">FL: <span class="feels-like"></span></div>
+          </div>
+        </div>
+  
+  
+        <div class="right-side">
+          <div class="weather-details">
+            <div class="weather-title">Weather information</div>
+            <div class="wind-speed-container property-container">
+              <div class="wind-speed-title property-title">Wind speed</div>
+              <span class="wind-speed"></span>
+            </div>
+            <div class="humidity-container property-container">
+              <div class="humidity-title property-title">Humidity</div>
+              <span class="humidity-box"></span>
+            </div>
+            <div class="pressure-container property-container">
+              <div class="pressure-title property-title">Pressure</div>
+              <span class="pressure"></span>
+            </div>
+            <div class="sunrise-container property-container">
+              <div class="sunrise-title property-title">Sunrise</div>
+              <span class="sunrise"></span>
+            </div>
+            <div class="sunset-container property-container">
+              <div class="sunset-title property-title">Sunset</div>
+              <span class="sunset"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="./script.js"></script>
+</html>
