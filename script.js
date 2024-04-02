@@ -165,9 +165,9 @@ function getWeatherFromLocality(data, currentLocation){
     let weatherSunset = getSunsetOrSunrise(weather.sys.sunset, weather.timezone);
 
 
-    let sunrise = new Date(weatherSunrise * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    let sunrise = new Date(weatherSunrise * 1000).toLocaleTimeString();
 
-    let sunset = new Date(weatherSunset * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    let sunset = new Date(weatherSunset * 1000).toLocaleTimeString();
 
 
 
