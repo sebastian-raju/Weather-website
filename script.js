@@ -33,14 +33,9 @@ let currentLocation = false;
 
 
 let time = new Date(); 
- let localTime = time.getTime();
- let localOffset = time.getTimezoneOffset() * 60000;
- console.log(time.getTimezoneOffset());
- console.log(localTime);
-
- console.log(localOffset);
- 
- let utc = localTime + localOffset;
+let localTime = time.getTime();
+let localOffset = time.getTimezoneOffset() * 60000;
+let utc = localTime + localOffset;
 
 
 
@@ -132,8 +127,6 @@ function getWeatherFromLocality(data, currentLocation){
 
     console.log(weather);
 
-    console.log(-(weather.timezone * 1000));
-
 
     let weatherMain = weather.weather["0"].main;
     let iconCode = weather.weather["0"].icon;
@@ -150,35 +143,31 @@ function getWeatherFromLocality(data, currentLocation){
 
      //timezone
 
-     let riseTime = (weather.sys.sunrise * 1000);
+    //  solved
 
-     let riseOffset = -(weather.timezone * 1000);
+    //  let weatherSunrise = new Date((weather.timezone + weather.sys.sunrise)*1000).toUTCString();
 
-     let riseUtc = riseTime + riseOffset;
+    //  let weatherSunset = new Date((weather.timezone + weather.sys.sunset)*1000).toUTCString();
 
+
+    //  console.log(weatherSunrise);
+    //  console.log(weatherSunset);
+
+
+    function getSunsetOrSunrise(unixTimeStamp, timezoneOffset){
+      let browserTimeOffset = new Date().getTimezoneOffset() * 60;
+      return (browserTimeOffset + unixTimeStamp + timezoneOffset);
+    }
      
-     let weatherSunrise = riseUtc + (1000 * weather.timezone);
 
-     let sunrise = new Date(weatherSunrise).toLocaleTimeString();
-     
+    let weatherSunrise = getSunsetOrSunrise(weather.sys.sunrise, weather.timezone);
 
-
-    // let sunriseTimeStamp = new Date(1000 * weather.sys.sunrise);
-
-    // let sunsetTimeStamp = new Date(1000 * weather.sys.sunset);
-
-    // let timezoneOffset = new Date.getTimezoneOffset() * 6000;
-
-    // let sunriseLocal = new Date(sunriseTimeStamp.getTime() + timezoneOffset);
-
-    // let sunsetLocal = new Date(sunsetTimeStamp.getTime() + timezoneOffset);
+    let weatherSunset = getSunsetOrSunrise(weather.sys.sunset, weather.timezone);
 
 
-    // let sunrise = sunriseLocal.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    // let sunset = sunsetLocal.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    let sunrise = new Date(weatherSunrise * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-  
-
+    let sunset = new Date(weatherSunset * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
 
 
@@ -197,7 +186,7 @@ function getWeatherFromLocality(data, currentLocation){
       pressure.innerText = `: ${weather.main.pressure} hPa`;
 
       sunRise.innerText = `: ${sunrise}`;
-      // sunSet.innerText = `: ${sunset}`;
+      sunSet.innerText = `: ${sunset}`;
 
       icons.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`
       
