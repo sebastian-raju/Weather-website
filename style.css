@@ -31,7 +31,7 @@ body{
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  row-gap: 100px;
+  row-gap: 150px;
 }
 
 .btn-container{
@@ -316,7 +316,7 @@ width: 110px;
 }
 
 .container{
-  row-gap: 30px;
+  row-gap: 80px;
 }
 .error-message{
   font-size: 12px;
@@ -335,4 +335,10 @@ margin-top: 0px;
 .current-location-btn{
   padding: 7px 14px;
 }
+}
+
+@media only screen and (max-height:767px){
+  .container{
+    row-gap: 30px;
+  }
 }
