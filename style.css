@@ -28,8 +28,10 @@ body{
   width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  row-gap: 100px;
 }
 
 .btn-container{
@@ -81,7 +83,6 @@ body{
 
 .input-container{
   width: 100%;
-  margin-bottom: 100px;
   position: relative;
 }
 
@@ -311,7 +312,11 @@ width: 110px;
 @media only screen and (max-width:690px){
 .main-weather-information{
   grid-template-columns: 1fr;
-  row-gap: 5px;
+  row-gap: 15px;
+}
+
+.container{
+  row-gap: 30px;
 }
 .error-message{
   font-size: 12px;
@@ -324,6 +329,10 @@ width: 110px;
 backdrop-filter: blur(50px);
 padding: 5px 10px;
 border-radius: 25px;
-margin-top: 10px;
+margin-top: 0px;
+}
+
+.current-location-btn{
+  padding: 7px 14px;
 }
 }
