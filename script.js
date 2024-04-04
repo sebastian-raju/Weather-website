@@ -205,9 +205,11 @@ function getWeatherFromLocality(data, currentLocation){
       }
       else if(dayOrNight === 'n'){
         if(iconCode === "50n" && weatherId !== 701 && weatherId !== 721 && weatherId !== 741){
+          console.log(weatherId);
+          console.log(iconCode);
           mainContainer.style.backgroundImage = `url('./assets/Neutraln.jpg')`;
         }
-        if(temp <= 5)  {
+        else if(temp <= 5)  {
           mainContainer.style.backgroundImage = `url('./assets/Snown.jpg')`;
         }
         else{
