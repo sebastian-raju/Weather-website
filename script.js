@@ -131,6 +131,7 @@ function getWeatherFromLocality(data, currentLocation){
     let weatherMain = weather.weather["0"].main;
     let iconCode = weather.weather["0"].icon;
     let dayOrNight = iconCode.slice(-1);
+    let weatherId = weather.weather["0"].id; 
 
     let timeZone = utc + (1000 * weather.timezone);
 
@@ -191,7 +192,10 @@ function getWeatherFromLocality(data, currentLocation){
       icons.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`
       
       if(dayOrNight === 'd'){
-        if(temp <= 5){
+        if(iconCode === "50d" && weatherId !== 701 && weatherId !== 721 && weatherId !== 741){
+          mainContainer.style.backgroundImage = `url('./assets/Neutrald.jpg')`;
+        }
+        else if(temp <= 5){
           mainContainer.style.backgroundImage = `url('./assets/Snowd.jpg')`;
         }
         else{
@@ -200,6 +204,9 @@ function getWeatherFromLocality(data, currentLocation){
         
       }
       else if(dayOrNight === 'n'){
+        if(iconCode === "50n" && weatherId !== 701 && weatherId !== 721 && weatherId !== 741){
+          mainContainer.style.backgroundImage = `url('./assets/Neutraln.jpg')`;
+        }
         if(temp <= 5)  {
           mainContainer.style.backgroundImage = `url('./assets/Snown.jpg')`;
         }
